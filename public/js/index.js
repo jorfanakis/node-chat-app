@@ -8,16 +8,18 @@
   });
 
   socket.on('newMessage', function(data) {
+    const formattedTime = moment(data.createdAt).format('h:mm a');
     const li = jQuery('<li></li>');
-    li.text(`${data.from}: ${data.text}`);
+    li.text(`${data.from} ${formattedTime} ${data.text}`);
 
     jQuery('#messages').append(li);
   });
 
   socket.on('newLocationMessage', function(data) {
+    const formattedTime = moment(data.createdAt).format('h:mm a');
     const li = jQuery('<li></li>');
     const a = jQuery('<a target="_">My Current Location</a>');
-    li.text(`${data.from}: `);
+    li.text(`${data.from} ${formattedTime}:`);
     a.attr('href', data.url);
     li.append(a);
     
